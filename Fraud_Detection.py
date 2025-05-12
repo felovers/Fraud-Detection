@@ -1,3 +1,5 @@
+from os import path
+import sys
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -8,8 +10,22 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score
 from imblearn.over_sampling import SMOTE
 
+# Função para localizar o creditcard.csv corretamente no .exe ou .py
+def resource_path(relative_path):
+    try:
+        # Quando for executável (PyInstaller)
+        base_path = sys._MEIPASS
+    except AttributeError:
+        # Quando for .py: usa a pasta onde o arquivo .py está
+        base_path = path.dirname(path.abspath(__file__))
+
+    return path.join(base_path, relative_path)
+
+# Caminho correto para o creditcard.csv
+csv_path = resource_path('creditcard.csv')
+
 # Carregar o dataset
-df = pd.read_csv('creditcard.csv')
+df = pd.read_csv(csv_path)
 
 # Exibir informações e distribuição das classes
 print(df.info())
