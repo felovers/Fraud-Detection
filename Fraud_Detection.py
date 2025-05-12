@@ -10,7 +10,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score
 from imblearn.over_sampling import SMOTE
 
-# Função para localizar o creditcard.csv corretamente no .exe ou .py
+# Função para localizar o creditcard.csv no .exe ou .py
 def resource_path(relative_path):
     try:
         # Quando for executável (PyInstaller)
@@ -21,7 +21,7 @@ def resource_path(relative_path):
 
     return path.join(base_path, relative_path)
 
-# Caminho correto para o creditcard.csv
+# Caminho correto para o csv
 csv_path = resource_path('creditcard.csv')
 
 # Carregar o dataset
@@ -68,5 +68,5 @@ plt.ylabel('Real')
 plt.title('Matriz de Confusão')
 plt.show()
 
-# Pausar para não fechar o terminal imediatamente
+# Pausa para não fechar o terminal imediatamente
 input("Pressione Enter para sair...")
