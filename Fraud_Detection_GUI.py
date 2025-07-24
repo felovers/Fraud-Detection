@@ -33,7 +33,7 @@ def capture_output(func, *args, **kwargs):
     return buffer.getvalue()
 
 # Função de processamento
-def processar(csv_path, model_path):
+def process(csv_path, model_path):
     df = pd.read_csv(csv_path)
 
     scaler = StandardScaler()
@@ -109,26 +109,26 @@ def open_image_window(path_img):
     lbl_full.pack(expand=True)
     lbl_full.bind("<Button-1>", lambda e: top.destroy())
 
-def selecionar_csv():
+def select_csv():
     file_path = filedialog.askopenfilename(filetypes=[("CSV files", "*.csv")])
     if file_path:
         entry_csv.delete(0, tk.END)
         entry_csv.insert(0, file_path)
 
-def selecionar_modelo():
+def select_model():
     file_path = filedialog.asksaveasfilename(defaultextension=".pkl", filetypes=[("PKL files", "*.pkl")])
     if file_path:
         entry_modelo.delete(0, tk.END)
         entry_modelo.insert(0, file_path)
 
-def executar():
+def execute():
     csv_path = entry_csv.get()
     model_path = entry_modelo.get()
     if not csv_path or not path.exists(csv_path):
         messagebox.showerror("Erro", "Arquivo CSV não encontrado.")
         return
     try:
-        output = capture_output(processar, csv_path, model_path)
+        output = capture_output(process, csv_path, model_path)
         txt_output.config(state='normal')
         txt_output.delete("1.0", tk.END)
         txt_output.insert(tk.END, output)
@@ -150,15 +150,15 @@ root.title("Detecção de Fraudes com Machine Learning")
 tk.Label(root, text="Selecione o CSV:").grid(row=0, column=0, sticky='w', padx=10, pady=(10, 0))
 entry_csv = tk.Entry(root, width=60)
 entry_csv.grid(row=1, column=0, padx=10)
-tk.Button(root, text="Procurar", command=selecionar_csv).grid(row=1, column=1, padx=5)
+tk.Button(root, text="Procurar", command=select_csv).grid(row=1, column=1, padx=5)
 
 tk.Label(root, text="Arquivo do Modelo (.pkl):").grid(row=2, column=0, sticky='w', padx=10, pady=(10, 0))
 entry_modelo = tk.Entry(root, width=60)
 entry_modelo.insert(0, "RF_Fraud_Model.pkl")
 entry_modelo.grid(row=3, column=0, padx=10)
-tk.Button(root, text="Salvar Como", command=selecionar_modelo).grid(row=3, column=1, padx=5)
+tk.Button(root, text="Salvar Como", command=select_model).grid(row=3, column=1, padx=5)
 
-tk.Button(root, text="Executar", command=executar).grid(row=4, column=0, columnspan=2, pady=10)
+tk.Button(root, text="Executar", command=execute).grid(row=4, column=0, columnspan=2, pady=10)
 
 tk.Label(root, text="Saída:").grid(row=5, column=0, sticky='w', padx=10)
 txt_output = ScrolledText(root, width=100, height=20, state='disabled')
