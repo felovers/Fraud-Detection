@@ -6,5 +6,7 @@ Will keep the priority of updating the .py file first.
 
 The comparison file compares between two different models to test how each works and how good they are for the task at hand (Fraud Detection).
 
+The GUI file contains a graphic interface while maintaining the same code for training and detection.
+
 Next Updates:
-The comparison .py will have a different dataset and an experience of downloading the dataset directly from Kaggle.
+Updates to the GUI, making it nicer in general.
