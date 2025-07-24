@@ -118,12 +118,12 @@ def select_csv():
 def select_model():
     file_path = filedialog.asksaveasfilename(defaultextension=".pkl", filetypes=[("PKL files", "*.pkl")])
     if file_path:
-        entry_modelo.delete(0, tk.END)
-        entry_modelo.insert(0, file_path)
+        entry_model.delete(0, tk.END)
+        entry_model.insert(0, file_path)
 
 def execute():
     csv_path = entry_csv.get()
-    model_path = entry_modelo.get()
+    model_path = entry_model.get()
     if not csv_path or not path.exists(csv_path):
         messagebox.showerror("Erro", "Arquivo CSV não encontrado.")
         return
@@ -153,9 +153,9 @@ entry_csv.grid(row=1, column=0, padx=10)
 tk.Button(root, text="Procurar", command=select_csv).grid(row=1, column=1, padx=5)
 
 tk.Label(root, text="Arquivo do Modelo (.pkl):").grid(row=2, column=0, sticky='w', padx=10, pady=(10, 0))
-entry_modelo = tk.Entry(root, width=60)
-entry_modelo.insert(0, "RF_Fraud_Model.pkl")
-entry_modelo.grid(row=3, column=0, padx=10)
+entry_model = tk.Entry(root, width=60)
+entry_model.insert(0, "RF_Fraud_Model.pkl")
+entry_model.grid(row=3, column=0, padx=10)
 tk.Button(root, text="Salvar Como", command=select_model).grid(row=3, column=1, padx=5)
 
 tk.Button(root, text="Executar", command=execute).grid(row=4, column=0, columnspan=2, pady=10)
